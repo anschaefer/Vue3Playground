@@ -1,9 +1,9 @@
 <template>
-  <SomeComponent/>
+  <PlaygroundComponent/>
 </template>
 
 <script setup>
-import SomeComponent from './components/SomeComponent.vue'
+import PlaygroundComponent from './components/PlaygroundComponent.vue'
 
 </script>
 
