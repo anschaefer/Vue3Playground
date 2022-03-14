@@ -1,9 +1,12 @@
 <script setup>
-import {ref, computed} from "vue";
+import {ref, computed, onMounted, watch} from "vue";
+import ChildComponent from './ChildComponent.vue';
 
 const count = ref(0)
 const text = ref('')
 const awesome = ref(true);
+const p = ref(null)
+const childMsg = ref('No child message yet')
 
 let id = 0
 
@@ -35,6 +38,14 @@ function addTodo() {
 function removeTodo(todo) {
   todos.value = todos.value.filter((t) => t != todo)
 }
+
+onMounted(() => {
+  p.value.textContent = "mounted!"
+})
+
+watch(count, (newCount) => {
+  console.log(text.value + ' Count: ' + newCount)
+})
 </script>
 
 <template>
@@ -45,7 +56,7 @@ function removeTodo(todo) {
 
   <div class="input">
     <h2>Inputs and Buttons</h2>
-    <input v-bind:value="text" @input="onInput" placeholder="Edit button label here">
+    <input v-bind:value=text @input="onInput" placeholder="Edit button label here">
     <button @click="increment">{{ text }}: {{count}}</button>
   </div>
 
@@ -64,6 +75,15 @@ function removeTodo(todo) {
       {{ hideCompleted ? 'Show all' : 'Hide completed' }}
     </button>
   </div>
+
+  <div class="lifeCycleHooks">
+    <p ref="p">Hello Vue! </p>
+  </div>
+
+  <ChildComponent :msg="text" @response="(msg) => childMsg = msg">
+    Some slot Info from parent
+  </ChildComponent>
+  <h3>{{ childMsg }}</h3>
 </template>
 
 <style>
