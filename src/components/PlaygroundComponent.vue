@@ -56,7 +56,7 @@ watch(count, (newCount) => {
 
   <div class="input">
     <h2>Inputs and Buttons</h2>
-    <input v-bind:value=text @input="onInput" placeholder="Edit button label here">
+    <input @input="onInput" placeholder="Edit button label here">
     <button @click="increment">{{ text }}: {{count}}</button>
   </div>
 
